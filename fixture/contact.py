@@ -1,6 +1,5 @@
 __author__ = 'ASUS'
 
-
 class ContactHelper:
 
     def __init__(self, app):
@@ -55,3 +54,13 @@ class ContactHelper:
     def submit_contact_creation(self):
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='Enter']").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        # alert accept
+        alert = wd.switch_to.alert
+        alert.accept()
