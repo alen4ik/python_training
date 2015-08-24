@@ -104,7 +104,6 @@ class Application:
     def submit_contact_creation(self):
         wd = self.wd
         self.submit_contact_creation()
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
     def logout(self):
         wd = self.wd
