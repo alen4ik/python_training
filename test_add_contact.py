@@ -18,7 +18,7 @@ def test_add_contact(app):
         app.logout()
 
 
-def test_add_empty_contact(app:
+def test_add_empty_contact(app):
         app.login(username="admin", password="secret")
         app.fill_contacts_form(Contact(firstname="", middlename="", lastname="", title="", nickname="", company="", address="", home="",
                                 mobile="", work="", fax=""))
