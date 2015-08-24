@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 __author__ = 'ASUS'
 
 
 class Contact:
 
-    def __init__(self, firstname, middlename, lastname, title, nickname, company, address, home, mobile,
-                           work, fax):
+    def __init__(self, firstname, middlename, lastname, title, nickname, company, address, home, mobile, work, fax):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname

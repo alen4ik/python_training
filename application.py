@@ -1,5 +1,8 @@
-from selenium.webdriver.firefox.webdriver import WebDriver
+# -*- coding: utf-8 -*-
 __author__ = 'ASUS'
+
+from selenium.webdriver.firefox.webdriver import WebDriver
+
 
 class Application:
 
@@ -11,19 +14,17 @@ class Application:
         wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def open_home_page_contact(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/edit.php")
-
     def login(self, username, password):
         wd = self.wd
         self.open_home_page()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
+        txt_field_user = wd.find_element_by_name("user")
+        txt_field_user.click()
+        txt_field_user.clear()
+        txt_field_user.send_keys(username)
+        txt_field_password = wd.find_element_by_name("pass")
+        txt_field_password.click()
+        txt_field_password.clear()
+        txt_field_password.send_keys(password)
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
     def open_groups_page(self):
@@ -31,11 +32,18 @@ class Application:
         wd.find_element_by_link_text("groups").click()
 
     def create_group(self, group):
-        wd = self.wd
         self.open_groups_page()
-        # init group creation
+        self.init_group_creation()
+        self.fill_group_form(group)
+        self.submit_group_creation()
+        self.return_to_groups_page()
+
+    def init_group_creation(self):
+        wd = self.wd
         wd.find_element_by_name("new").click()
-        # fill group form
+
+    def fill_group_form(self, group):
+        wd = self.wd
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys(group.name)
@@ -45,17 +53,27 @@ class Application:
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
-        # submit group creation
+
+    def submit_group_creation(self):
+        wd = self.wd
         wd.find_element_by_name("submit").click()
-        self.return_to_groups_page()
 
     def return_to_groups_page(self):
         wd = self.wd
         wd.find_element_by_link_text("group page").click()
 
+    def create_contact(self, contact):
+        wd = self.wd
+        self.init_contact_creation()
+        self.fill_contacts_form(contact)
+        self.submit_contact_creation()
+
+    def init_contact_creation(self):
+        wd = self.wd
+        wd.find_element_by_css_selector("div#nav a[href='edit.php']").click()
+
     def fill_contacts_form(self, contact):
         wd = self.wd
-        # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
@@ -92,12 +110,12 @@ class Application:
 
     def submit_contact_creation(self):
         wd = self.wd
-        self.submit_contact_creation()
+        wd.find_element_by_css_selector("input[value='Enter']").click()
 
     def logout(self):
         wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def destroy (self):
+    def destroy(self):
         self.wd.quit()
 
