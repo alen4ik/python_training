@@ -55,12 +55,25 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='Enter']").click()
 
+    def select_first_contact(self):
+        wd.find_element_by_name("selected[]").click()
+
     def delete_first_contact(self):
         wd = self.app.wd
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         # submit deletion
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # alert accept
         alert = wd.switch_to.alert
         alert.accept()
+
+    def modify_first_contact(self, new_contact_data):
+        wd = self.app.wd
+        self.select_first_contact()
+        # open modification form
+        #wd.find_element_by_xpath("//div[@id='maintable']/form[2]/div[2]/input").click()
+        wd.find_element_by_css_selector("div#maintable a[href='edit.php']").click()
+        # fill contact form
+        self.fill_contacts_form()
+        # submit modification
+        wd.find_element_by_name("update").click()
