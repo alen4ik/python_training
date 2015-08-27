@@ -4,7 +4,7 @@ __author__ = 'ASUS'
 
 class Contact:
 
-    def __init__(self, firstname, middlename, lastname, title, nickname, company, address, home, mobile, work, fax):
+    def __init__(self, firstname=None, middlename=None, lastname=None, title=None, nickname=None, company=None, address=None, home=None, mobile=None, work=None, fax=None):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
